@@ -15,8 +15,6 @@ import {
   Clock,
   Layers,
   TrendingUp,
-  Award,
-  Globe,
 } from 'lucide-react';
 
 const generateMockRankHistory = (currentPos) => {
@@ -43,6 +41,18 @@ export default function Rankings() {
   const [liveResult, setLiveResult] = useState(null);
   const [projectRankings, setProjectRankings] = useState([]);
   const [loadingProjectRankings, setLoadingProjectRankings] = useState(false);
+
+  const loadProjectRankings = async (projId) => {
+    setLoadingProjectRankings(true);
+    try {
+      const res = await api.get(`/rankings/project/${projId}`);
+      setProjectRankings(res.data.rankings || []);
+    } catch (err) {
+      console.warn('Could not load full project rankings', err);
+    } finally {
+      setLoadingProjectRankings(false);
+    }
+  };
 
   useEffect(() => {
     api.get('/projects')
@@ -79,18 +89,6 @@ export default function Rankings() {
       }
     }
   }, [selectedProjectId, projects]);
-
-  const loadProjectRankings = async (projId) => {
-    setLoadingProjectRankings(true);
-    try {
-      const res = await api.get(`/rankings/project/${projId}`);
-      setProjectRankings(res.data.rankings || []);
-    } catch (err) {
-      console.warn('Could not load full project rankings', err);
-    } finally {
-      setLoadingProjectRankings(false);
-    }
-  };
 
   const handleCheckRank = async (e) => {
     if (e && e.preventDefault) e.preventDefault();

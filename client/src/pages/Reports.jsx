@@ -10,9 +10,7 @@ import {
   HelpCircle,
   Wrench,
   Code2,
-  FileText,
   CheckCircle2,
-  X,
   Download,
 } from 'lucide-react';
 
@@ -316,20 +314,6 @@ export default function Reports() {
   const [execNotes, setExecNotes] = useState('Comprehensive technical and on-page audit conducted using RankPilot XAI diagnostic engine. High-priority remediation items highlighted below.');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    api.get('/audit/history?limit=20')
-      .then((res) => {
-        const fetched = res.data.audits || [];
-        if (fetched.length > 0) {
-          setAudits(fetched);
-          loadAuditDetail(fetched[0]._id);
-        }
-      })
-      .catch(() => {
-        // Fallback reports are preloaded
-      });
-  }, []);
-
   const loadAuditDetail = async (id) => {
     try {
       const res = await api.get(`/audit/${id}`);
@@ -343,6 +327,20 @@ export default function Reports() {
     const local = fallbackReports.find((a) => String(a._id) === String(id));
     if (local) setSelectedAudit(local);
   };
+
+  useEffect(() => {
+    api.get('/audit/history?limit=20')
+      .then((res) => {
+        const fetched = res.data.audits || [];
+        if (fetched.length > 0) {
+          setAudits(fetched);
+          loadAuditDetail(fetched[0]._id);
+        }
+      })
+      .catch(() => {
+        // Fallback reports are preloaded
+      });
+  }, []);
 
   const handlePrint = () => {
     window.print();

@@ -12,9 +12,12 @@ import {
   ArrowLeftRight,
   Printer,
   ChevronRight,
+  HelpCircle,
   Menu,
   X,
 } from 'lucide-react';
+
+const currentYear = new Date().getFullYear();
 
 export default function Landing() {
   const [urlInput, setUrlInput] = useState('');
@@ -785,7 +788,7 @@ export default function Landing() {
             </Link>
           </div>
           <div className="text-muted small">
-            © {new Date().getFullYear()} RankPilot. All rights reserved.
+            © {currentYear} RankPilot. All rights reserved.
           </div>
         </div>
       </footer>

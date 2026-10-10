@@ -58,13 +58,6 @@ export default function Analyze() {
     category: 'Retail & E-Commerce',
   });
 
-  useEffect(() => {
-    if (urlParam) {
-      setUrl(urlParam);
-      runAudit(urlParam, kwParam);
-    }
-  }, [urlParam]);
-
   const getCacheKey = (u, kw) => `rp_audit_${u.trim().toLowerCase()}_${(kw || '').trim().toLowerCase()}`;
 
   const populateStateFromData = (data) => {
@@ -162,6 +155,13 @@ export default function Analyze() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (urlParam) {
+      setUrl(urlParam);
+      runAudit(urlParam, kwParam);
+    }
+  }, [urlParam, kwParam]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

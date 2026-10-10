@@ -3,13 +3,9 @@ import api from '../services/api';
 import {
   ArrowLeftRight,
   Search,
-  CheckCircle2,
   XCircle,
-  AlertTriangle,
   Trophy,
-  ExternalLink,
   Clock,
-  Layers,
 } from 'lucide-react';
 
 const mockCompareDefault = {

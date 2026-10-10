@@ -7,6 +7,12 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const logout = () => {
+    localStorage.removeItem('rp_token');
+    localStorage.removeItem('rp_user');
+    setUser(null);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem('rp_token');
     const savedUser = localStorage.getItem('rp_user');
@@ -49,12 +55,6 @@ export function AuthProvider({ children }) {
     localStorage.setItem('rp_user', JSON.stringify(userData));
     setUser(userData);
     return userData;
-  };
-
-  const logout = () => {
-    localStorage.removeItem('rp_token');
-    localStorage.removeItem('rp_user');
-    setUser(null);
   };
 
   return (

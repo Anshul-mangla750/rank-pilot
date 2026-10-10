@@ -14,7 +14,6 @@ import {
   Globe,
   AlertTriangle,
   AlertOctagon,
-  CheckCircle2,
   TrendingUp,
   Target,
   ArrowRight,
@@ -22,7 +21,6 @@ import {
   Plus,
   RefreshCw,
   BarChart2,
-  Activity,
   ShieldCheck,
 } from 'lucide-react';
 

@@ -6,28 +6,19 @@ import {
   Search,
   ArrowRight,
   CheckCircle2,
-  AlertTriangle,
-  TrendingUp,
-  BarChart2,
-  Cpu,
   Code2,
   MapPin,
   Eye,
   ArrowLeftRight,
-  FileText,
   Printer,
-  Sliders,
-  ShieldCheck,
-  Layers,
-  Globe,
-  HelpCircle,
-  Wrench,
   ChevronRight,
-  ExternalLink,
+  Menu,
+  X,
 } from 'lucide-react';
 
 export default function Landing() {
   const [urlInput, setUrlInput] = useState('');
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -49,7 +40,7 @@ export default function Landing() {
     <div className="min-vh-100 d-flex flex-column" style={{ backgroundColor: '#f8fafc', color: 'var(--mui-slate-800)', fontFamily: 'var(--font-sans)' }}>
       {/* Navigation Bar */}
       <header
-        className="sticky-top bg-white border-bottom"
+        className="sticky-top bg-white border-bottom position-relative"
         style={{
           borderColor: 'var(--mui-slate-200)',
           boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)',
@@ -107,14 +98,14 @@ export default function Landing() {
                 onClick={() => navigate('/dashboard')}
                 className="mui-btn mui-btn-primary mui-btn-sm"
               >
-                <span>Go to Dashboard</span>
-                <ArrowRight size={14} />
+                <span>Dashboard</span>
+                <ArrowRight size={14} className="d-none d-sm-inline" />
               </button>
             ) : (
               <>
                 <Link
                   to="/login"
-                  className="mui-btn mui-btn-outlined mui-btn-sm text-decoration-none"
+                  className="mui-btn mui-btn-outlined mui-btn-sm text-decoration-none py-1.5 px-2.5"
                 >
                   Sign In
                 </Link>
@@ -127,8 +118,88 @@ export default function Landing() {
                 </Link>
               </>
             )}
+
+            {/* Mobile Hamburger Menu Toggle */}
+            <button
+              type="button"
+              onClick={() => setMobileNavOpen(!mobileNavOpen)}
+              className="btn btn-sm btn-light border text-secondary d-md-none p-1.5 rounded-2 ms-1"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileNavOpen ? <X size={19} /> : <Menu size={19} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Dropdown Drawer */}
+        {mobileNavOpen && (
+          <div
+            className="bg-white border-bottom shadow-sm d-md-none p-3 position-absolute top-100 start-0 w-100"
+            style={{ zIndex: 1000, borderColor: 'var(--mui-slate-200)' }}
+          >
+            <nav className="d-flex flex-column gap-2 mb-3">
+              <a
+                href="#features"
+                onClick={() => setMobileNavOpen(false)}
+                className="text-dark text-decoration-none fw-medium py-1.5 px-2 rounded hover-bg-light"
+              >
+                Capabilities
+              </a>
+              <a
+                href="#bharat-seo"
+                onClick={() => setMobileNavOpen(false)}
+                className="text-dark text-decoration-none fw-medium py-1.5 px-2 rounded hover-bg-light"
+              >
+                Bharat SEO
+              </a>
+              <a
+                href="#competitor-audit"
+                onClick={() => setMobileNavOpen(false)}
+                className="text-dark text-decoration-none fw-medium py-1.5 px-2 rounded hover-bg-light"
+              >
+                Head-to-Head Audit
+              </a>
+              <a
+                href="#case-studies"
+                onClick={() => setMobileNavOpen(false)}
+                className="text-dark text-decoration-none fw-medium py-1.5 px-2 rounded hover-bg-light"
+              >
+                Case Studies
+              </a>
+            </nav>
+            <div className="d-flex align-items-center gap-2 pt-2 border-top">
+              {user ? (
+                <button
+                  onClick={() => {
+                    setMobileNavOpen(false);
+                    navigate('/dashboard');
+                  }}
+                  className="mui-btn mui-btn-primary w-100 mui-btn-sm"
+                >
+                  <span>Go to Dashboard</span>
+                  <ArrowRight size={14} />
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={() => setMobileNavOpen(false)}
+                    className="mui-btn mui-btn-outlined w-50 mui-btn-sm text-center"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setMobileNavOpen(false)}
+                    className="mui-btn mui-btn-primary w-50 mui-btn-sm text-center"
+                  >
+                    Start Free
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}

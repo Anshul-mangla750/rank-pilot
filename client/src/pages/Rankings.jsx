@@ -160,13 +160,13 @@ export default function Rankings() {
             </p>
           </div>
           {projects.length > 0 && (
-            <div className="d-flex align-items-center gap-2">
+            <div className="d-flex align-items-center gap-2 flex-wrap">
               <span className="text-secondary small" style={{ fontSize: '13px' }}>Select Project:</span>
               <select
                 value={selectedProjectId}
                 onChange={(e) => setSelectedProjectId(e.target.value)}
-                className="mui-input py-1.5 px-2.5"
-                style={{ fontSize: '13.5px', width: 'auto' }}
+                className="mui-input py-1.5 px-2.5 flex-grow-1 flex-sm-grow-0"
+                style={{ fontSize: '13.5px', width: 'auto', minWidth: '160px' }}
               >
                 {projects.map((p) => (
                   <option key={p._id} value={p._id}>

@@ -19,10 +19,8 @@ import {
   FileCode,
   Eye,
   Sliders,
-  TrendingUp,
   Cpu,
   MapPin,
-  MessageCircle,
   Smartphone,
   Monitor,
 } from 'lucide-react';
@@ -333,19 +331,19 @@ export default function Analyze() {
           <div className="rp-card">
             <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-4 pb-4 border-bottom" style={{ borderColor: 'var(--mui-slate-200)' }}>
               {/* Score circle */}
-              <div className="d-flex align-items-center gap-4">
-                <div className={`mui-score-ring ${getScoreRingClass(result.score)}`} style={{ width: '60px', height: '60px' }}>
+              <div className="d-flex align-items-center gap-3 gap-sm-4">
+                <div className={`mui-score-ring ${getScoreRingClass(result.score)}`} style={{ width: '60px', height: '60px', flexShrink: 0 }}>
                   <span style={{ fontSize: '22px', lineHeight: 1 }}>{result.score}</span>
                   <span style={{ fontSize: '10px', textTransform: 'uppercase', opacity: 0.85 }}>/ 100</span>
                 </div>
-                <div>
+                <div className="overflow-hidden" style={{ minWidth: 0 }}>
                   <div className="d-flex align-items-center gap-2">
-                    <h3 className="h5 fw-bold text-dark mb-0">{result.url}</h3>
+                    <h3 className="h5 fw-bold text-dark mb-0 text-break" style={{ fontSize: '16px' }}>{result.url}</h3>
                     <a
                       href={result.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-secondary"
+                      className="text-secondary flex-shrink-0"
                     >
                       <ExternalLink size={14} />
                     </a>
@@ -362,7 +360,7 @@ export default function Analyze() {
               </div>
 
               {/* Status summary */}
-              <div className="d-flex align-items-center gap-4 text-center">
+              <div className="d-flex align-items-center justify-content-around justify-content-md-end gap-3 gap-sm-4 text-center">
                 <div>
                   <span className="h3 fw-bold d-block mb-0" style={{ color: 'var(--mui-error)', fontSize: '26px' }}>
                     {result.checks.filter((c) => c.status === 'fail').length}
@@ -637,7 +635,7 @@ export default function Analyze() {
                                         <span>3. Correction Method & Framework Code Fix</span>
                                       </div>
                                       {/* Framework Toggle Bar */}
-                                      <div className="btn-group btn-group-sm" role="group">
+                                      <div className="d-flex flex-wrap gap-1" role="group">
                                         {[
                                           { id: 'nextjs', label: 'Next.js App Router' },
                                           { id: 'react', label: 'React Helmet' },
@@ -788,7 +786,7 @@ export default function Analyze() {
                 </div>
 
                 {/* Live Preview Box */}
-                <div className="p-4 rounded border bg-white shadow-sm" style={{ maxWidth: serpDevice === 'mobile' ? '460px' : '650px', borderColor: 'var(--mui-slate-300)' }}>
+                <div className="p-3 p-sm-4 rounded border bg-white shadow-sm w-100" style={{ maxWidth: serpDevice === 'mobile' ? '460px' : '650px', borderColor: 'var(--mui-slate-300)' }}>
                   {/* Google SERP Card */}
                   <div className="d-flex align-items-center gap-2 mb-1">
                     <div className="d-flex align-items-center justify-content-center rounded-circle bg-light border" style={{ width: 22, height: 22, fontSize: 11 }}>
@@ -874,9 +872,9 @@ export default function Analyze() {
                 </div>
 
                 {/* Score Gauge Card */}
-                <div className="rp-card p-4 bg-light border">
+                <div className="rp-card p-3 p-sm-4 bg-light border">
                   <div className="row align-items-center g-3">
-                    <div className="col-md-4 text-center border-end" style={{ borderColor: 'var(--mui-slate-200)' }}>
+                    <div className="col-12 col-md-4 text-center border-bottom border-bottom-md-0 border-end-md pb-3 pb-md-0 mb-3 mb-md-0" style={{ borderColor: 'var(--mui-slate-200)' }}>
                       <span className="text-muted text-uppercase fw-semibold d-block" style={{ fontSize: '12px' }}>
                         Predicted Top-10 SERP Probability
                       </span>
@@ -886,12 +884,12 @@ export default function Analyze() {
                       <span className="mui-chip chip-pass">High Ranking Likelihood</span>
                     </div>
 
-                    <div className="col-md-8 ps-md-4">
+                    <div className="col-12 col-md-8 ps-md-4">
                       <h4 className="h6 fw-bold text-dark mb-1" style={{ fontSize: '14px' }}>Model Confidence & Diagnostic Verdict</h4>
                       <p className="text-secondary small mb-2" style={{ fontSize: '13px' }}>
                         The model identifies strong topical relevance and semantic markup. Addressing canonical duplicates and optimizing budget mobile 4G latency will bridge the gap to rank #1–#3.
                       </p>
-                      <div className="d-flex align-items-center gap-3" style={{ fontSize: '12px' }}>
+                      <div className="d-flex flex-wrap align-items-center gap-2 gap-sm-3" style={{ fontSize: '12px' }}>
                         <span><strong>Model:</strong> Gradient Boosted Trees (XGBoost)</span>
                         <span>·</span>
                         <span><strong>Confidence:</strong> 94.2%</span>
@@ -913,7 +911,7 @@ export default function Analyze() {
 
                   <div className="d-flex flex-column gap-2">
                     {shapFeatures.map((item, idx) => (
-                      <div key={idx} className="p-2.5 px-3 rounded border bg-white d-flex align-items-center justify-content-between" style={{ borderColor: 'var(--mui-slate-200)', fontSize: '13.5px' }}>
+                      <div key={idx} className="p-2.5 px-3 rounded border bg-white d-flex flex-wrap flex-sm-nowrap align-items-center justify-content-between gap-2" style={{ borderColor: 'var(--mui-slate-200)', fontSize: '13.5px' }}>
                         <div className="d-flex align-items-center gap-2">
                           <span className={`badge ${item.positive ? 'bg-success' : 'bg-danger'}`} style={{ fontSize: '11px' }}>
                             {item.positive ? '+' : '-'}

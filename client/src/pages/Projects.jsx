@@ -278,7 +278,7 @@ export default function Projects() {
           style={{ backgroundColor: 'rgba(15, 23, 42, 0.5)', zIndex: 1050 }}
         >
           <div
-            className="rp-card p-4 bg-white"
+            className="rp-card rp-modal-dialog p-3 p-sm-4 bg-white"
             style={{ maxWidth: '500px', width: '100%', boxShadow: 'var(--mui-shadow-8)' }}
           >
             <div className="d-flex align-items-center justify-content-between pb-3 border-bottom mb-3" style={{ borderColor: 'var(--mui-slate-200)' }}>

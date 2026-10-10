@@ -46,7 +46,7 @@ export default function Sidebar({ mobileOpen = false, onCloseMobile }) {
           >
             <Compass size={18} className="text-white" />
           </div>
-          {!collapsed && (
+          {(!collapsed || mobileOpen) && (
             <div className="d-flex flex-column">
               <span className="fw-bold text-dark lh-sm" style={{ fontSize: '16px', letterSpacing: '-0.3px' }}>
                 Rank<span style={{ color: 'var(--mui-primary)' }}>Pilot</span>
@@ -98,7 +98,7 @@ export default function Sidebar({ mobileOpen = false, onCloseMobile }) {
                       strokeWidth={isActive ? 2.2 : 1.8}
                       style={{ color: isActive ? 'var(--mui-primary)' : 'var(--mui-slate-500)', flexShrink: 0 }}
                     />
-                    {!collapsed && <span>{label}</span>}
+                    {(!collapsed || mobileOpen) && <span>{label}</span>}
                   </>
                 )}
               </NavLink>
@@ -111,7 +111,7 @@ export default function Sidebar({ mobileOpen = false, onCloseMobile }) {
       <div className="p-2.5 border-top bg-light" style={{ borderColor: 'var(--mui-slate-200)' }}>
         <div
           className={`d-flex align-items-center gap-2 p-2 bg-white rounded-2 border shadow-sm ${
-            collapsed ? 'justify-content-center' : ''
+            collapsed && !mobileOpen ? 'justify-content-center' : ''
           }`}
           style={{ borderColor: 'var(--mui-slate-200)' }}
         >
@@ -121,7 +121,7 @@ export default function Sidebar({ mobileOpen = false, onCloseMobile }) {
           >
             {user?.name?.charAt(0)?.toUpperCase() || 'A'}
           </div>
-          {!collapsed && (
+          {(!collapsed || mobileOpen) && (
             <div className="flex-grow-1 overflow-hidden" style={{ minWidth: 0 }}>
               <div className="d-flex align-items-center justify-content-between">
                 <p className="m-0 fw-semibold text-truncate text-dark" style={{ fontSize: '13px' }}>
@@ -146,12 +146,12 @@ export default function Sidebar({ mobileOpen = false, onCloseMobile }) {
             style={{ fontSize: '13px' }}
           >
             <LogOut size={14} />
-            {!collapsed && <span>Sign out</span>}
+            {(!collapsed || mobileOpen) && <span>Sign out</span>}
           </button>
           <button
             onClick={() => setCollapsed(!collapsed)}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            className="btn btn-sm text-secondary p-1.5 border-0"
+            className="btn btn-sm text-secondary p-1.5 border-0 d-none d-lg-inline-flex align-items-center justify-content-center"
           >
             <ChevronLeft
               size={16}

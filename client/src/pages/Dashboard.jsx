@@ -165,7 +165,7 @@ export default function Dashboard() {
               </div>
 
               {/* Quick suggestions */}
-              <div className="d-flex align-items-center gap-2 mt-2" style={{ fontSize: '13px', color: 'var(--mui-slate-600)' }}>
+              <div className="d-flex align-items-center flex-wrap gap-2 mt-2" style={{ fontSize: '13px', color: 'var(--mui-slate-600)' }}>
                 <span>Quick tests:</span>
                 {['indiamart.com', 'nykaa.com', 'zerodha.com', 'carwale.com'].map((tag) => (
                   <button
@@ -312,7 +312,7 @@ export default function Dashboard() {
 
       {/* Main Monitored Domains Section */}
       <div className="rp-card p-0 overflow-hidden">
-        <div className="px-4 py-3 d-flex align-items-center justify-content-between border-bottom bg-light" style={{ borderColor: 'var(--mui-slate-200)' }}>
+        <div className="p-3 p-sm-4 d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-3 border-bottom bg-light" style={{ borderColor: 'var(--mui-slate-200)' }}>
           <div>
             <h2 className="h6 fw-bold text-dark text-uppercase m-0" style={{ fontSize: '14px', letterSpacing: '0.5px' }}>
               Monitored Web Properties
@@ -321,7 +321,7 @@ export default function Dashboard() {
               Live status, target country, and current SEO audit health
             </p>
           </div>
-          <div className="d-flex align-items-center gap-2">
+          <div className="d-flex align-items-center gap-2 flex-wrap">
             <button
               onClick={fetchProjects}
               className="mui-btn mui-btn-outlined mui-btn-sm"

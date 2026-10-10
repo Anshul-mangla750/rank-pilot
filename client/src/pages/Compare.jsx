@@ -232,40 +232,42 @@ export default function Compare() {
       <div className="row g-3">
         {/* Site 1 Card */}
         <div className="col-12 col-md-6">
-          <div className="rp-card h-100 position-relative" style={{ borderTop: winner === 'site1' ? '4px solid var(--mui-success)' : '1px solid var(--mui-slate-200)' }}>
-            {winner === 'site1' && (
-              <span className="position-absolute top-0 end-0 m-3 mui-chip chip-pass fw-bold d-flex align-items-center gap-1">
-                <Trophy size={13} />
-                <span>Overall Winner (+{Math.abs(deltaScore)} pts)</span>
-              </span>
-            )}
-            <div className="d-flex align-items-center gap-3 mb-3">
-              <div
-                className={`mui-score-ring ${site1.score >= 80 ? 'pass' : 'warning'}`}
-                style={{ width: '56px', height: '56px', fontSize: '20px' }}
-              >
-                {site1.score}
+          <div className="rp-card h-100" style={{ borderTop: winner === 'site1' ? '4px solid var(--mui-success)' : '1px solid var(--mui-slate-200)' }}>
+            <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-2 mb-3">
+              <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: 0 }}>
+                <div
+                  className={`mui-score-ring ${site1.score >= 80 ? 'pass' : 'warning'}`}
+                  style={{ width: '56px', height: '56px', fontSize: '20px', flexShrink: 0 }}
+                >
+                  {site1.score}
+                </div>
+                <div className="overflow-hidden" style={{ minWidth: 0 }}>
+                  <span className="text-muted text-uppercase fw-semibold d-block" style={{ fontSize: '11px' }}>Domain 1 (Your Site)</span>
+                  <h3 className="h6 fw-bold text-dark text-truncate mb-0" style={{ fontSize: '16px' }} title={site1.url}>{site1.url}</h3>
+                </div>
               </div>
-              <div className="overflow-hidden">
-                <span className="text-muted text-uppercase fw-semibold d-block" style={{ fontSize: '11px' }}>Domain 1 (Your Site)</span>
-                <h3 className="h6 fw-bold text-dark text-truncate mb-0" style={{ fontSize: '16px' }}>{site1.url}</h3>
-              </div>
+              {winner === 'site1' && (
+                <span className="mui-chip chip-pass fw-bold d-inline-flex align-items-center gap-1 flex-shrink-0">
+                  <Trophy size={13} />
+                  <span>Overall Winner (+{Math.abs(deltaScore)} pts)</span>
+                </span>
+              )}
             </div>
 
             <div className="row g-2 text-center pt-2 border-top" style={{ borderColor: 'var(--mui-slate-100)' }}>
-              <div className="col-3">
+              <div className="col-6 col-sm-3">
                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '10px' }}>On-Page</span>
                 <span className="fw-bold text-dark" style={{ fontSize: '15px' }}>{site1.categories?.onPage?.score}%</span>
               </div>
-              <div className="col-3">
+              <div className="col-6 col-sm-3">
                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '10px' }}>Technical</span>
                 <span className="fw-bold text-dark" style={{ fontSize: '15px' }}>{site1.categories?.technical?.score}%</span>
               </div>
-              <div className="col-3">
+              <div className="col-6 col-sm-3">
                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '10px' }}>Content</span>
                 <span className="fw-bold text-dark" style={{ fontSize: '15px' }}>{site1.categories?.content?.score}%</span>
               </div>
-              <div className="col-3">
+              <div className="col-6 col-sm-3">
                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '10px' }}>Speed</span>
                 <span className="fw-bold text-dark" style={{ fontSize: '15px' }}>{site1.categories?.performance?.score}%</span>
               </div>
@@ -275,40 +277,42 @@ export default function Compare() {
 
         {/* Site 2 Card */}
         <div className="col-12 col-md-6">
-          <div className="rp-card h-100 position-relative" style={{ borderTop: winner === 'site2' ? '4px solid var(--mui-success)' : '1px solid var(--mui-slate-200)' }}>
-            {winner === 'site2' && (
-              <span className="position-absolute top-0 end-0 m-3 mui-chip chip-pass fw-bold d-flex align-items-center gap-1">
-                <Trophy size={13} />
-                <span>Overall Winner (+{Math.abs(deltaScore)} pts)</span>
-              </span>
-            )}
-            <div className="d-flex align-items-center gap-3 mb-3">
-              <div
-                className={`mui-score-ring ${site2.score >= 80 ? 'pass' : 'warning'}`}
-                style={{ width: '56px', height: '56px', fontSize: '20px' }}
-              >
-                {site2.score}
+          <div className="rp-card h-100" style={{ borderTop: winner === 'site2' ? '4px solid var(--mui-success)' : '1px solid var(--mui-slate-200)' }}>
+            <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-2 mb-3">
+              <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: 0 }}>
+                <div
+                  className={`mui-score-ring ${site2.score >= 80 ? 'pass' : 'warning'}`}
+                  style={{ width: '56px', height: '56px', fontSize: '20px', flexShrink: 0 }}
+                >
+                  {site2.score}
+                </div>
+                <div className="overflow-hidden" style={{ minWidth: 0 }}>
+                  <span className="text-muted text-uppercase fw-semibold d-block" style={{ fontSize: '11px' }}>Domain 2 (Competitor)</span>
+                  <h3 className="h6 fw-bold text-dark text-truncate mb-0" style={{ fontSize: '16px' }} title={site2.url}>{site2.url}</h3>
+                </div>
               </div>
-              <div className="overflow-hidden">
-                <span className="text-muted text-uppercase fw-semibold d-block" style={{ fontSize: '11px' }}>Domain 2 (Competitor)</span>
-                <h3 className="h6 fw-bold text-dark text-truncate mb-0" style={{ fontSize: '16px' }}>{site2.url}</h3>
-              </div>
+              {winner === 'site2' && (
+                <span className="mui-chip chip-pass fw-bold d-inline-flex align-items-center gap-1 flex-shrink-0">
+                  <Trophy size={13} />
+                  <span>Overall Winner (+{Math.abs(deltaScore)} pts)</span>
+                </span>
+              )}
             </div>
 
             <div className="row g-2 text-center pt-2 border-top" style={{ borderColor: 'var(--mui-slate-100)' }}>
-              <div className="col-3">
+              <div className="col-6 col-sm-3">
                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '10px' }}>On-Page</span>
                 <span className="fw-bold text-dark" style={{ fontSize: '15px' }}>{site2.categories?.onPage?.score}%</span>
               </div>
-              <div className="col-3">
+              <div className="col-6 col-sm-3">
                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '10px' }}>Technical</span>
                 <span className="fw-bold text-dark" style={{ fontSize: '15px' }}>{site2.categories?.technical?.score}%</span>
               </div>
-              <div className="col-3">
+              <div className="col-6 col-sm-3">
                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '10px' }}>Content</span>
                 <span className="fw-bold text-dark" style={{ fontSize: '15px' }}>{site2.categories?.content?.score}%</span>
               </div>
-              <div className="col-3">
+              <div className="col-6 col-sm-3">
                 <span className="text-muted text-uppercase d-block" style={{ fontSize: '10px' }}>Speed</span>
                 <span className="fw-bold text-dark" style={{ fontSize: '15px' }}>{site2.categories?.performance?.score}%</span>
               </div>

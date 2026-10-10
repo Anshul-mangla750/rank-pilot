@@ -748,7 +748,7 @@ export default function Reports() {
           className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-3 no-print"
           style={{ backgroundColor: 'rgba(15, 23, 42, 0.65)', zIndex: 1050, backdropFilter: 'blur(3px)' }}
         >
-          <div className="bg-white rounded-3 shadow-lg border p-4 w-100" style={{ maxWidth: '540px', borderColor: 'var(--mui-slate-200)' }}>
+          <div className="bg-white rounded-3 shadow-lg border p-3 p-sm-4 w-100 rp-modal-dialog" style={{ maxWidth: '540px', borderColor: 'var(--mui-slate-200)' }}>
             <div className="d-flex align-items-center justify-content-between pb-3 border-bottom mb-3" style={{ borderColor: 'var(--mui-slate-200)' }}>
               <div className="d-flex align-items-center gap-2">
                 <Printer size={18} style={{ color: 'var(--mui-primary)' }} />

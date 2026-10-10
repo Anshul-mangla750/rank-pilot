@@ -100,6 +100,8 @@ a:hover {
   min-height: 100vh;
   display: flex;
   background-color: var(--mui-bg);
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .rp-sidebar {
@@ -128,6 +130,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-x: hidden;
 }
 
 .rp-sidebar.collapsed + .rp-main-wrapper {
@@ -175,7 +178,7 @@ a:hover {
 @media (max-width: 991.98px) {
   .rp-sidebar {
     transform: translateX(-100%);
-    width: 260px !important;
+    width: 270px !important;
     z-index: 1050;
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--mui-shadow-8);
@@ -195,7 +198,26 @@ a:hover {
   }
 
   .rp-content {
-    padding: 14px;
+    padding: 16px 14px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .rp-topbar {
+    padding: 0 10px;
+    height: 58px;
+  }
+
+  .rp-content {
+    padding: 12px 10px;
+  }
+
+  .rp-card {
+    padding: 14px !important;
+  }
+
+  .mui-table th, .mui-table td {
+    padding: 10px 12px;
   }
 }
 
@@ -207,6 +229,25 @@ a:hover {
   box-shadow: var(--mui-shadow-1);
   padding: 20px;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  max-width: 100%;
+}
+
+.table-responsive {
+  -webkit-overflow-scrolling: touch;
+}
+
+.rp-modal-dialog {
+  max-width: 520px;
+  width: 100%;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+  .border-end-md {
+    border-right: 1px solid var(--mui-slate-200) !important;
+  }
 }
 
 .rp-card:hover {

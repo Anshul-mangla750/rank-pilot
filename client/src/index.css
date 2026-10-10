@@ -1,0 +1,512 @@
+/* ==========================================================================
+   RankPilot — Pure Sans-Serif Vanilla CSS + Bootstrap 5 + Material UI
+   No Tailwind CSS. Clean, legible typography with balanced proportions.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Sans-Serif Typography Stack */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Material UI Theme Tokens */
+  --mui-primary: #1976d2;
+  --mui-primary-dark: #115293;
+  --mui-primary-light: #4791db;
+  --mui-primary-bg: #e3f2fd;
+  
+  --mui-secondary: #7b1fa2;
+  --mui-success: #2e7d32;
+  --mui-success-bg: #edf7ed;
+  --mui-warning: #ed6c02;
+  --mui-warning-bg: #fff4e5;
+  --mui-error: #d32f2f;
+  --mui-error-bg: #fdeded;
+  --mui-info: #0288d1;
+  --mui-info-bg: #e1f5fe;
+
+  --mui-slate-900: #0f172a;
+  --mui-slate-800: #1e293b;
+  --mui-slate-700: #334155;
+  --mui-slate-600: #475569;
+  --mui-slate-500: #64748b;
+  --mui-slate-400: #94a3b8;
+  --mui-slate-300: #cbd5e1;
+  --mui-slate-200: #e2e8f0;
+  --mui-slate-100: #f1f5f9;
+  --mui-slate-50:  #f8fafc;
+
+  --mui-bg: #f4f6f8;
+  --mui-paper: #ffffff;
+  --mui-border: #e0e0e0;
+  
+  /* MUI Elevation Shadows */
+  --mui-shadow-1: 0px 2px 2px -1px rgba(0,0,0,0.06), 0px 1px 2px 0px rgba(0,0,0,0.04), 0px 1px 4px 0px rgba(0,0,0,0.04);
+  --mui-shadow-2: 0px 3px 4px -2px rgba(0,0,0,0.08), 0px 3px 5px 0px rgba(0,0,0,0.05), 0px 1px 9px 0px rgba(0,0,0,0.04);
+  --mui-shadow-4: 0px 4px 6px -1px rgba(0,0,0,0.08), 0px 5px 7px 0px rgba(0,0,0,0.05), 0px 2px 12px 0px rgba(0,0,0,0.04);
+  --mui-shadow-8: 0px 6px 8px -3px rgba(0,0,0,0.1), 0px 9px 12px 1px rgba(0,0,0,0.07), 0px 3px 16px 2px rgba(0,0,0,0.05);
+
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 68px;
+  --topbar-height: 64px;
+}
+
+/* Base Reset & Sans-Serif Typography */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--mui-bg);
+  color: var(--mui-slate-800);
+  font-size: 14.5px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings scale */
+h1, .h1 { font-size: 22px; font-weight: 700; color: var(--mui-slate-900); line-height: 1.3; }
+h2, .h2 { font-size: 18px; font-weight: 600; color: var(--mui-slate-900); line-height: 1.35; }
+h3, .h3 { font-size: 16px; font-weight: 600; color: var(--mui-slate-900); line-height: 1.4; }
+h4, .h4 { font-size: 15px; font-weight: 600; color: var(--mui-slate-900); line-height: 1.4; }
+h5, .h5 { font-size: 14.5px; font-weight: 600; color: var(--mui-slate-900); line-height: 1.4; }
+h6, .h6 { font-size: 14px; font-weight: 600; color: var(--mui-slate-900); line-height: 1.4; }
+
+p, span, div, label, li {
+  font-family: var(--font-sans);
+}
+
+/* Ensure code blocks only use monospace */
+code, kbd, pre, samp {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+a {
+  color: var(--mui-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* App Layout Structure */
+.rp-layout {
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--mui-bg);
+}
+
+.rp-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: #ffffff;
+  border-right: 1px solid var(--mui-slate-200);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--mui-shadow-1);
+}
+
+.rp-sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.rp-main-wrapper {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rp-sidebar.collapsed + .rp-main-wrapper {
+  margin-left: var(--sidebar-collapsed-width);
+  width: calc(100% - var(--sidebar-collapsed-width));
+}
+
+.rp-topbar {
+  height: var(--topbar-height);
+  background: #ffffff;
+  border-bottom: 1px solid var(--mui-slate-200);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.rp-content {
+  padding: 24px;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+}
+
+/* Mobile Drawer & Responsive Layout */
+.rp-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 1040;
+  animation: rpFadeIn 0.2s ease-out;
+}
+
+@keyframes rpFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 991.98px) {
+  .rp-sidebar {
+    transform: translateX(-100%);
+    width: 260px !important;
+    z-index: 1050;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--mui-shadow-8);
+  }
+
+  .rp-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .rp-main-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .rp-topbar {
+    padding: 0 14px;
+  }
+
+  .rp-content {
+    padding: 14px;
+  }
+}
+
+/* Material UI Cards & Elevation */
+.mui-paper, .rp-card {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid var(--mui-slate-200);
+  box-shadow: var(--mui-shadow-1);
+  padding: 20px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.rp-card:hover {
+  box-shadow: var(--mui-shadow-2);
+}
+
+.rp-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--mui-slate-100);
+  margin-bottom: 16px;
+}
+
+/* Buttons — Material UI Styling */
+.mui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  text-decoration: none !important;
+  line-height: 1.4;
+}
+
+.mui-btn-primary {
+  background-color: var(--mui-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.25);
+}
+.mui-btn-primary:hover {
+  background-color: var(--mui-primary-dark);
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.35);
+  color: #ffffff;
+}
+
+.mui-btn-dark {
+  background-color: var(--mui-slate-900);
+  color: #ffffff;
+}
+.mui-btn-dark:hover {
+  background-color: var(--mui-slate-800);
+  color: #ffffff;
+}
+
+.mui-btn-outlined {
+  background-color: #ffffff;
+  color: var(--mui-slate-700);
+  border-color: var(--mui-slate-300);
+}
+.mui-btn-outlined:hover {
+  background-color: var(--mui-slate-50);
+  border-color: var(--mui-slate-400);
+  color: var(--mui-slate-900);
+}
+
+.mui-btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 5px;
+}
+
+/* Material Form Controls */
+.mui-input-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.mui-input {
+  width: 100%;
+  padding: 9px 13px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid var(--mui-slate-300);
+  background: #ffffff;
+  color: var(--mui-slate-900);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+  line-height: 1.4;
+}
+.mui-input:focus {
+  border-color: var(--mui-primary);
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+/* Material Chips & Status Badges */
+.mui-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 12px;
+  line-height: 1.25;
+}
+
+.chip-pass {
+  background-color: var(--mui-success-bg);
+  color: var(--mui-success);
+  border: 1px solid rgba(46, 125, 50, 0.25);
+}
+
+.chip-warning {
+  background-color: var(--mui-warning-bg);
+  color: var(--mui-warning);
+  border: 1px solid rgba(237, 108, 2, 0.25);
+}
+
+.chip-fail {
+  background-color: var(--mui-error-bg);
+  color: var(--mui-error);
+  border: 1px solid rgba(211, 47, 47, 0.25);
+}
+
+.chip-info {
+  background-color: var(--mui-primary-bg);
+  color: var(--mui-primary);
+  border: 1px solid rgba(25, 118, 210, 0.25);
+}
+
+.chip-neutral {
+  background-color: var(--mui-slate-100);
+  color: var(--mui-slate-700);
+  border: 1px solid var(--mui-slate-200);
+}
+
+/* Material Navigation Tabs */
+.mui-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--mui-slate-200);
+  background: #ffffff;
+  padding: 0 16px;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.mui-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.mui-tabs::-webkit-scrollbar-thumb {
+  background: var(--mui-slate-300);
+  border-radius: 4px;
+}
+
+.mui-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 16px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mui-slate-600);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.mui-tab:hover {
+  color: var(--mui-primary);
+}
+.mui-tab.active {
+  color: var(--mui-primary);
+  border-bottom-color: var(--mui-primary);
+  font-weight: 600;
+}
+
+/* Material Tables */
+.mui-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.mui-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  text-align: left;
+}
+
+.mui-table th {
+  background-color: var(--mui-slate-50);
+  color: var(--mui-slate-600);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--mui-slate-200);
+}
+
+.mui-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--mui-slate-100);
+  color: var(--mui-slate-800);
+  vertical-align: middle;
+}
+
+.mui-table tr:hover td {
+  background-color: #fafbfd;
+}
+
+.mui-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Score Circle / Meter */
+.mui-score-ring {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border: 3px solid;
+}
+.mui-score-ring.pass {
+  border-color: var(--mui-success);
+  color: var(--mui-success);
+  background-color: var(--mui-success-bg);
+}
+.mui-score-ring.warning {
+  border-color: var(--mui-warning);
+  color: var(--mui-warning);
+  background-color: var(--mui-warning-bg);
+}
+.mui-score-ring.fail {
+  border-color: var(--mui-error);
+  color: var(--mui-error);
+  background-color: var(--mui-error-bg);
+}
+
+/* Code Blocks */
+.mui-code-block {
+  background-color: #1e293b;
+  color: #f8fafc;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+/* Typography Helpers */
+.text-small {
+  font-size: 13px !important;
+}
+
+.text-caption {
+  font-size: 12px !important;
+}
+
+.fw-semi {
+  font-weight: 600 !important;
+}
+
+/* Executive Branded PDF Export Styles */
+@media print {
+  .rp-sidebar, .rp-topbar, .btn, .mui-btn, .mui-tabs, .no-print {
+    display: none !important;
+  }
+  .rp-main-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .rp-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .rp-card {
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+  body {
+    background-color: #ffffff !important;
+  }
+}

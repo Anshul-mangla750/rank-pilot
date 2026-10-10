@@ -14,9 +14,32 @@ const app = express();
 
 // Security middleware
 app.use(helmet());
+// Allowed origins for CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://127.0.0.1:5173',
+  'https://rank-pilot-seven.vercel.app',
+  config.clientUrl,
+].filter(Boolean);
+
 app.use(cors({
-  origin: config.clientUrl,
+  origin: (origin, callback) => {
+    // Allow non-browser requests (e.g. Postman, curl, server-to-server)
+    if (!origin) return callback(null, true);
+
+    const isAllowed =
+      allowedOrigins.includes(origin) ||
+      /^https:\/\/([a-zA-Z0-9_-]+\.)?vercel\.app$/.test(origin);
+
+    if (isAllowed) {
+      return callback(null, true);
+    }
+    return callback(null, false);
+  },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
 
 // Body parsing

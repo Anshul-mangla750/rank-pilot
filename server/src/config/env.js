@@ -17,9 +17,6 @@ module.exports = {
     expiresIn: process.env.JWT_EXPIRES_IN || '7d',
   },
 
-  redis: {
-    url: process.env.REDIS_URL || 'redis://localhost:6379',
-  },
 
   pagespeed: {
     apiKey: process.env.PAGESPEED_API_KEY,
